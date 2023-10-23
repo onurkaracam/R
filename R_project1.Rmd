@@ -1,0 +1,77 @@
+---
+title: "R Project 1"
+author: "Onur Karaçam"
+output: html_notebook
+---
+
+#### <https://rpubs.com/onurkaracam/project1>
+
+Problem
+
+Your client needs you to crate a 3x2 matrix object using the following dataset, assigned to a variable called years: 1997,1998,1999,2000,2001,2002
+
+-Write the following automated tests using stopifnot():
+
+-The variable years exists
+
+-The variable years is a matrix Object
+
+-All the elements of years are numeric
+
+-The variable years has 3 rows and 2 columns
+
+-The variable years has no NAs
+
+-Maximum and minimum values of the variable are c(1997,2002)
+
+```{r}
+years <- matrix(c(1997:2002), nrow=3, ncol=2)
+stopifnot(exists("years"))
+stopifnot(is.matrix(years))
+stopifnot(is.numeric(years))
+stopifnot(nrow(years) == 3 && ncol(years) == 2)
+stopifnot(!anyNA(years))
+stopifnot(min(years) == 1997 && max(years) == 2002)
+```
+
+Code Description
+
+stopifnot(exists("years"))
+
+```         
+                         ---> Checks if an object named "years" exists.
+                         
+                         ---> The parameter inside is considered as a string.
+                         
+                         ---> Returns a Boolean.
+```
+
+stopifnot(is.matrix(years))
+
+```         
+                          ---> Checks if the variable "years" is a matrix.
+```
+
+stopifnot(is.numeric(years))
+
+```         
+                         ---> Checks if the variable "years" has a numeric data type.
+```
+
+stopifnot(nrow(years) == 3 && ncol(years) == 2)
+
+```         
+                         ---> Checks if the number of rows in the "years" matrix is 3 and the number of columns is 2.
+```
+
+stopifnot(!anyNA(years))
+
+```         
+                         ---> Checks if there are no missing values (NA) in the "years" matrix.
+```
+
+stopifnot(min(years) == 1997 && max(years) == 2002)
+
+```         
+                         ---> Checks if the minimum value in "years" is 1997 and the maximum value is 2002.
+```
