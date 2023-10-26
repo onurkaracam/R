@@ -1,0 +1,128 @@
+---
+title: "R Project 2"
+author: "Onur Karaçam"
+date: "2023-10-24"
+output: html_document
+---
+https://rpubs.com/onurkaracam/project2
+
+Problem
+
+Your client needs you to create a list object
+using the json file located at https://tinyurl.com/dersgithub (under Week 3), assign to a variable called myquiz. Your R code must directly download the json file from Github. No manual downloading.
+
+Write the following automated tests in R using stopifnot():
+
+● The variable myquiz exists
+
+● The variable myquiz is a list object
+
+● There is only ONE first sub-level element in myquiz
+
+● The name of the only first sub-level element is “quiz”
+
+● All the sub elements "myquiz[[1]]$maths$q1$options"
+should be successfully converted to numeric
+
+
+```{r}
+# install.packages("jsonlite")
+library(jsonlite)
+myquiz <- fromJSON("https://raw.githubusercontent.com/CevikYazilimGelistirme-2324/Exercises/main/Week3/example_2.json")
+
+stopifnot(exists("myquiz"))
+stopifnot(is.list(myquiz))
+stopifnot(length(myquiz) == 1 && is.list(myquiz[[1]]))
+
+# NOT TRUE - stopifnot(names(myquiz[[1]]) == "quiz") *sport
+stopifnot(names(myquiz[1]) == "quiz")
+
+elements <- myquiz[[1]]$maths$q1$options
+converted <- all(!is.na(as.numeric(elements)))
+stopifnot(converted)
+print(converted)
+
+```
+
+
+## Code Description
+
+
+myquiz <- fromJSON("https://raw.githubusercontent.com/CevikYazilimGelistirme-2324/Exercises/main/Week3/example_2.json")
+
+
+```         
+                         ---> 'fromJSON()': This is a function from the jsonlite package in R. It is used to parse (i.e., convert) a JSON file or JSON text into an R object.
+                         
+                         ---> "https://raw.githubusercontent.com/CevikYazilimGelistirme-2324/Exercises/main/Week3/example_2.json": This is the URL of the JSON file that you want to download and parse.
+                         
+                         ---> Make sure to open the JSON file as RAW on GITHUB.
+```
+
+stopifnot(exists("myquiz"))
+
+
+```         
+                         ---> Checks if an object named "myquiz" exists.
+                         
+                         ---> The parameter inside is considered as a string.
+                         
+                         ---> Returns a Boolean.
+```
+
+stopifnot(is.list(myquiz))
+
+
+
+```         
+                         ---> Checks if the variable myquiz is a list. Returns TRUE if it is, FALSE if it's not.
+
+```
+
+stopifnot(length(myquiz) == 1 && is.list(myquiz[[1]]))
+
+
+```         
+                         ---> `length(myquiz)` == 1: This checks if the length of the list myquiz is equal to 1. In other words, it ensures that there is only one element in the list.
+                         
+                         ---> `is.list(myquiz[[1]])`: This checks if the first element of myquiz is itself a list. This ensures that the first sub-level element is a list.
+                         
+```
+
+elements <- myquiz[[1]]$maths$q1$options
+
+```
+                         ---> `myquiz[[1]]`: This is indexing into a list called myquiz. [[1]] is extracting the first element from this list. In R, lists are indexed starting from 1.
+                         
+                         ---> `$maths`: Assuming that the first element of myquiz is itself a list or a named list, this is accessing a component of that list named maths.
+                         
+                         ---> `$q1`: Again, assuming that maths is a list or a named list, this is accessing a component of maths named q1.                         
+                         
+                         ---> `$options`: Once again, assuming that q1 is a list or a named list, this is accessing a component of q1 named options.                  
+                        
+```
+
+converted <- all(!is.na(as.numeric(elements)))
+
+```         
+                         ---> `as.numeric(elements)`: This function attempts to convert the variable elements into a numeric type. If elements contains values that are not numeric (like characters or NA values), they will be coerced into NA.
+                         
+                         ---> `is.list(myquiz[[1]])`: This checks if the first element of myquiz is itself a list. This ensures that the first sub-level element is a list.
+                                                  
+                         ---> `is.list(myquiz[[1]])`: This checks if the first element of myquiz is itself a list. This ensures that the first sub-level element is a list.
+                         
+```
+
+stopifnot(converted)
+
+```         
+                         ---> Used to check if converted is TRUE. If converted is FALSE, it will throw an error.
+                  
+```
+
+print(converted)
+
+```
+                        ---> Value of converted is printed to the console.
+```
+                         
